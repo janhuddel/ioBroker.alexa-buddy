@@ -67,8 +67,8 @@
         ]
     },
     "native": {
-        "option1": true,
-        "option2": "42"
+        "server": "http://localhost:8080",
+        "apikey": ""
     },
     "objects": [],
     "instanceObjects": [
