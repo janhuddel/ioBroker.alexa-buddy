@@ -82,18 +82,26 @@ async function main() {
     await adapter.setStateAsync("info.connection", false, true);
   });
 
-  socket.on("setState", async (state, callback) => {
-    console.log(`set value of ${state.datapoint} to ${state.value}...`);
-    await adapter.setForeignStateAsync(state.datapoint, state.value);
-
-    callback(state.value);
+  socket.on("setState", async (states, callback) => {
+    for (const [datapoint, value] of Object.entries(states)) {
+      console.log(`setting state of ${datapoint} to ${value}...`);
+      await adapter.setForeignStateAsync(datapoint, value);
+    }
+    callback();
   });
 
   socket.on("getState", async (datapoint, callback) => {
-    console.log(`reading state of ${datapoint}...`);
-    const result = await adapter.getForeignStateAsync(datapoint);
-
-    callback(result);
+    //console.log(`reading state of ${datapoint}...`);
+    if (typeof datapoint !== "object") {
+      const result = await adapter.getForeignStateAsync(datapoint);
+      callback(result);
+    } else {
+      const result = {};
+      for (const [key, value] of Object.entries(datapoint)) {
+        result[key] = await adapter.getForeignStateAsync(value);
+      }
+      callback(result);
+    }
   });
 }
 
