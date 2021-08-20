@@ -83,15 +83,40 @@ async function main() {
   });
 
   socket.on("setState", async (state, callback) => {
-    console.log(`set value of ${state.datapoint} to ${state.value}...`);
-    await adapter.setForeignStateAsync(state.datapoint, state.value);
+    for (const [key, value] of Object.entries(state)) {
+      let nativeValue = value;
 
-    callback(state.value);
+      // check min/max when type is number
+      const object = await adapter.getForeignObjectAsync(key);
+      if (object.common.type === "number") {
+        const min = object.common.min;
+        const max = object.common.max;
+
+        if (min && value < min) {
+          console.log(
+            `value is smaller than defined min-value (${value} < ${min})`
+          );
+          nativeValue = min;
+        } else if (max && value > max) {
+          console.log(
+            `value is greater than defined max-value (${value} > ${max})`
+          );
+          nativeValue = max;
+        }
+      }
+
+      console.log(`set value of ${key} to ${nativeValue}...`);
+      await adapter.setForeignStateAsync(key, nativeValue);
+    }
+
+    callback();
   });
 
   socket.on("getState", async (datapoint, callback) => {
-    console.log(`reading state of ${datapoint}...`);
+    //console.log(`reading state of ${datapoint}...`);
     const result = await adapter.getForeignStateAsync(datapoint);
+
+    console.log(`state of ${datapoint} is ${result.val}`);
 
     callback(result);
   });
