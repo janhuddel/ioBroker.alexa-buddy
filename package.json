@@ -22,7 +22,7 @@
   "devDependencies": {
     "@iobroker/testing": "^2.5.4",
     "@types/gulp": "^4.0.9",
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "eslint": "^7.32.0",
