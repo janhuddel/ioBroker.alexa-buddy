@@ -1,0 +1,5 @@
+{
+    "alexa-buddy adapter settings": "Adaptereinstellungen für alexa-buddy",
+    "mqttServer": "MQTT Server",
+    "userId": "User Id (Amazon Account Id)"
+}

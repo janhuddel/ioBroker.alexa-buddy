@@ -1,0 +1,16 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "mqttServer": {
+            "type": "text",
+            "label": "mqttServer",
+            "newLine": true
+        },
+        "userId": {
+            "type": "text",
+            "label": "userId",
+            "newLine": true
+        }
+    }
+}

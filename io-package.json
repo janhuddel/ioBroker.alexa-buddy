@@ -1,97 +1,70 @@
 {
     "common": {
         "name": "alexa-buddy",
-        "version": "0.0.1",
+        "version": "1.0.0",
         "news": {
             "0.0.1": {
                 "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "de": "Erstveröffentlichung"
+            },
+            "1.0.0": {
+                "en": "final version",
+                "de": "Finale Version"
             }
         },
+        "title": "Alexa Buddy",
         "titleLang": {
             "en": "Alexa Buddy",
-            "de": "Alexa Buddy",
-            "ru": "Алекса Бадди",
-            "pt": "Alexa Buddy",
-            "nl": "Alexa Buddy",
-            "fr": "Alexa copain",
-            "it": "Alexa amico",
-            "es": "Alexa Buddy",
-            "pl": "Alexa Buddy",
-            "zh-cn": "亚历克萨巴迪"
+            "de": "Alexa Buddy"
         },
         "desc": {
             "en": "Control ioBroker-devices with Amazon's Alexa",
-            "de": "Steuern Sie ioBroker-Geräte mit Amazons Alexa",
-            "ru": "Управляйте ioBroker-устройствами с помощью Amazon Alexa",
-            "pt": "Controle dispositivos ioBroker com Alexa da Amazon",
-            "nl": "Bedien ioBroker-apparaten met Amazon's Alexa",
-            "fr": "Contrôlez les appareils ioBroker avec Alexa d'Amazon",
-            "it": "Controlla i dispositivi ioBroker con Alexa di Amazon",
-            "es": "Controle los dispositivos ioBroker con Alexa de Amazon",
-            "pl": "Kontroluj urządzenia ioBroker za pomocą Alexa . firmy Amazon",
-            "zh-cn": "使用亚马逊的 Alexa 控制 ioBroker 设备"
+            "de": "Steuern Sie ioBroker-Geräte mit Amazons Alexa"
         },
         "authors": [
-            "Jan Rohwer <jan.rohwer@gmail.com>"
+            "janhuddel <jan.rohwer@gmail.com>"
         ],
         "keywords": [
-            "Alexa"
+            "ioBroker",
+            "Alexa",
+            "Smart Home"
         ],
         "license": "MIT",
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
         "platform": "Javascript/Node.js",
-        "main": "main.js",
+        "main": "build/main.js",
         "icon": "alexa-buddy.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/janhuddel/ioBroker.alexa-buddy/master/admin/alexa-buddy.png",
-        "readme": "https://github.com/janhuddel/ioBroker.alexa-buddy/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/janhuddel/ioBroker.alexa-buddy/main/admin/alexa-buddy.png",
+        "readme": "https://github.com/janhuddel/ioBroker.alexa-buddy/blob/main/README.md",
         "loglevel": "info",
+        "tier": 3,
         "mode": "daemon",
         "type": "iot-systems",
         "compact": true,
         "connectionType": "local",
         "dataSource": "push",
-        "materialize": true,
+        "adminUI": {
+            "config": "json"
+        },
         "dependencies": [
             {
-                "js-controller": ">=2.0.0"
+                "js-controller": ">=3.3.22"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.13"
             }
         ]
     },
     "native": {
-        "server": "http://localhost:8080",
-        "apikey": ""
+        "mqttServer": "mqtt://<server-name/ip]>:<port>",
+        "userId": "<amazon account id>"
     },
     "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Device or service connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
-    ]
+    "instanceObjects": []
 }

@@ -1,45 +1,81 @@
 {
   "name": "iobroker.alexa-buddy",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Control ioBroker-devices with Amazon's Alexa",
   "author": {
-    "name": "Jan Rohwer",
+    "name": "huddl",
     "email": "jan.rohwer@gmail.com"
   },
   "homepage": "https://github.com/janhuddel/ioBroker.alexa-buddy",
   "license": "MIT",
   "keywords": [
-    "Alexa"
+    "ioBroker",
+    "Alexa",
+    "Smart Home"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/janhuddel/ioBroker.alexa-buddy"
+    "url": "https://github.com/janhuddel/ioBroker.alexa-buddy.git"
+  },
+  "engines": {
+    "node": ">= 18"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.5.1",
-    "socket.io-client": "^4.2.0"
+    "@iobroker/adapter-core": "^3.0.4",
+    "mqtt": "^5.3.6",
+    "mqtt-pattern": "^2.1.0"
   },
   "devDependencies": {
-    "@iobroker/testing": "^2.6.0",
-    "@types/gulp": "^4.0.10",
-    "axios": "^0.27.2",
-    "chai": "^4.3.7",
+    "@iobroker/adapter-dev": "^1.3.0",
+    "@iobroker/testing": "^4.1.0",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/chai": "^4.3.12",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.19.21",
+    "@types/proxyquire": "^1.3.31",
+    "@types/sinon": "^17.0.3",
+    "@types/sinon-chai": "^3.2.12",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "chai": "^4.4.1",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^7.32.0",
-    "gulp": "^4.0.2",
-    "mocha": "^9.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "mocha": "^10.3.0",
+    "prettier": "^3.2.5",
     "proxyquire": "^2.1.3",
-    "sinon": "^11.1.2",
-    "sinon-chai": "^3.7.0"
+    "rimraf": "^5.0.5",
+    "sinon": "^17.0.1",
+    "sinon-chai": "^3.7.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.0.4"
   },
-  "main": "main.js",
+  "main": "build/main.js",
+  "files": [
+    "admin{,/!(src)/**}/!(tsconfig|tsconfig.*|.eslintrc).{json,json5}",
+    "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+    "build/",
+    "www/",
+    "io-package.json",
+    "LICENSE"
+  ],
   "scripts": {
-    "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+    "prebuild": "rimraf build",
+    "build": "build-adapter ts",
+    "watch": "build-adapter ts --watch",
+    "prebuild:ts": "rimraf build",
+    "build:ts": "build-adapter ts",
+    "watch:ts": "build-adapter ts --watch",
+    "test:ts": "mocha --config test/mocharc.custom.json src/**/*.test.ts",
     "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
-    "test": "npm run test:js && npm run test:package",
-    "lint": "eslint"
+    "test": "npm run test:ts && npm run test:package",
+    "check": "tsc --noEmit",
+    "lint": "eslint --ext .ts src/",
+    "translate": "translate-adapter"
   },
   "bugs": {
     "url": "https://github.com/janhuddel/ioBroker.alexa-buddy/issues"

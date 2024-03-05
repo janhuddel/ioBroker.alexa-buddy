@@ -1,39 +1,31 @@
 {
     "cli": true,
+    "target": "directory",
     "adapterName": "alexa-buddy",
     "title": "Alexa Buddy",
-    "description": "Control ioBroker-devices with Amazon's Alexa",
-    "keywords": [
-        "Alexa"
-    ],
-    "expert": "yes",
-    "features": [
-        "adapter"
-    ],
+    "expert": "no",
+    "features": ["adapter"],
     "adminFeatures": [],
     "type": "iot-systems",
     "startMode": "daemon",
-    "connectionType": "local",
+    "connectionType": "cloud",
     "dataSource": "push",
-    "connectionIndicator": "yes",
-    "language": "JavaScript",
-    "adminReact": "no",
-    "tools": [
-        "ESLint"
-    ],
+    "connectionIndicator": "no",
+    "language": "TypeScript",
+    "nodeVersion": "18",
+    "adminUi": "json",
+    "tools": ["ESLint", "Prettier"],
     "releaseScript": "no",
-    "devServer": "yes",
-    "devServerPort": 8081,
+    "devServer": "no",
     "indentation": "Space (4)",
-    "quotes": "double",
-    "es6class": "no",
-    "authorName": "Jan Rohwer",
+    "quotes": "single",
+    "authorName": "huddl",
     "authorGithub": "janhuddel",
     "authorEmail": "jan.rohwer@gmail.com",
     "gitRemoteProtocol": "HTTPS",
     "gitCommit": "no",
+    "defaultBranch": "main",
     "license": "MIT License",
-    "ci": "gh-actions",
     "dependabot": "yes",
-    "creatorVersion": "1.34.1"
+    "creatorVersion": "2.6.2"
 }
